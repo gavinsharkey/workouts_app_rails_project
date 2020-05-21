@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_21_013806) do
+ActiveRecord::Schema.define(version: 2020_05_21_133918) do
+
+  create_table "exercises", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "user_saved_workouts", force: :cascade do |t|
+    t.integer "saved_workout_id"
+    t.integer "saved_user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["saved_user_id"], name: "index_user_saved_workouts_on_saved_user_id"
+    t.index ["saved_workout_id"], name: "index_user_saved_workouts_on_saved_workout_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"

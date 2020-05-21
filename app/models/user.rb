@@ -4,6 +4,12 @@ class User < ApplicationRecord
 
   devise :omniauthable, omniauth_providers: %i[facebook]
 
+  has_many :workouts
+  has_many :user_saved_workouts, foreign_key: :saved_user_id
+  has_many :saved_workouts, through: :user_saved_workouts
+
+  validates :name, presence: true
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider
