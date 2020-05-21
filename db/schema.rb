@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_21_133918) do
+ActiveRecord::Schema.define(version: 2020_05_21_193020) do
+
+  create_table "custom_exercises", force: :cascade do |t|
+    t.integer "workout_id"
+    t.integer "exercise_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["exercise_id"], name: "index_custom_exercises_on_exercise_id"
+    t.index ["workout_id"], name: "index_custom_exercises_on_workout_id"
+  end
 
   create_table "exercises", force: :cascade do |t|
     t.string "name"
