@@ -1,0 +1,2 @@
+<h1>Welcome <%= user_signed_in? ? current_user.name : 'User' %>!</h1>
+<%= link_to("View Profile", user_path(current_user)) %>
