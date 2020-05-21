@@ -1,1 +1,13 @@
 <h1>All Workouts</h1>
+
+<%= link_to('Make Workout', new_user_workout_path(current_user)) %>
+
+<ul>
+<% @workouts.each do |workout| %>
+  <li>
+    <h2><%= link_to(workout.name, workout_path(workout)) %></h2>
+    <p><%= workout.description %></p>
+    By: <%= link_to(workout.user.name, user_path(workout.user)) %>
+  </li>
+<% end %>
+</ul>
