@@ -1,0 +1,2 @@
+class UserSavedWorkoutsController < ApplicationController
+end
