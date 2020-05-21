@@ -1,5 +1,6 @@
 class WorkoutsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_workout, only: [:show]
 
   def index
     if params[:user_id]
@@ -9,5 +10,15 @@ class WorkoutsController < ApplicationController
     else
       @workouts = Workout.all
     end
+  end
+
+  def show
+    redirect_to workouts_path if !@workout
+  end
+
+  private
+
+  def set_workout
+    @workout = Workout.find_by(id: params[:id])
   end
 end

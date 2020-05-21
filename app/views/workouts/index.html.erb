@@ -7,7 +7,7 @@
   <li>
     <h2><%= link_to(workout.name, workout_path(workout)) %></h2>
     <p><%= workout.description %></p>
-    By: <%= link_to(workout.user.name, user_path(workout.user)) %>
+    By: <%= link_to(workout_user_name(workout), user_path(workout.user)) %>
   </li>
 <% end %>
 </ul>
