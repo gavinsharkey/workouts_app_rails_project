@@ -16,4 +16,5 @@ Rails.application.routes.draw do
 
   resources :workouts, only: [:index, :show, :edit, :update, :destroy]
   post '/workouts/:workout_id/save', to: 'user_saved_workouts#create', as: :save_workout
+  delete '/workouts/:workout_id/saved_workout', to: 'user_saved_workouts#destroy', as: :delete_saved_workout
 end
