@@ -1,0 +1,10 @@
+- Finish save workout button partial
+- Add workout show page
+- - display exercises on workout show page
+- - add button to save workout on show page
+- Add exercise show page
+- - should have name and description
+- Add form to create new workout
+- - Should route to nested route users/:user_id/workouts
+- - Allow exercises to be built while creating workout
+- 
