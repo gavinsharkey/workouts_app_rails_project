@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   end
 
   resources :workouts, only: [:index, :show, :edit, :update, :destroy]
+  post '/workouts/:workout_id/save', to: 'user_saved_workouts#create', as: :save_workout
 end
