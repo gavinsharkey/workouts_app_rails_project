@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :workouts, only: [:index, :show, :edit, :update, :destroy] do
-    resources :user_saved_workouts, only: [:new, :create, :destroy]
+    resources :user_saved_workouts, only: [:new, :create, :edit, :update, :destroy]
   end
   
 end
