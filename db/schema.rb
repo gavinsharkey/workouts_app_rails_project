@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_21_193020) do
+ActiveRecord::Schema.define(version: 2020_05_24_032548) do
 
   create_table "custom_exercises", force: :cascade do |t|
     t.integer "workout_id"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2020_05_21_193020) do
     t.integer "saved_user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "custom_title"
     t.index ["saved_user_id"], name: "index_user_saved_workouts_on_saved_user_id"
     t.index ["saved_workout_id"], name: "index_user_saved_workouts_on_saved_workout_id"
   end
