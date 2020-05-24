@@ -11,8 +11,8 @@ class UserSavedWorkoutsController < ApplicationController
 
   def create
     @workout = Workout.find_by(id: params[:workout_id])
-    @saved_workout = current_user.user_saved_workouts.build(workout: @workout, saved_workout_params)
-    
+    @saved_workout = current_user.user_saved_workouts.build(saved_workout: @workout, custom_title: saved_workout_params[:custom_title])
+
     if @saved_workout.save
       redirect_to workout_path(@workout)
     else
