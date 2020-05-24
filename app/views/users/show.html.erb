@@ -7,7 +7,6 @@
   <li>
     <h2><%= link_to(workout.name, workout_path(workout)) %></h2>
     <p><%= workout.description %></p>
-    <%= link_to('Save Workout', save_workout_path(workout), method: :post) %>
   </li>
 <% end %>
 </ul>

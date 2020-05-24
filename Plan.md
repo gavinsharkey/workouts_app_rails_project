@@ -1,4 +1,5 @@
 - Finish save workout button partial
+- Make form for saving workout
 - Add workout show page
 - - display exercises on workout show page
 - - add button to save workout on show page

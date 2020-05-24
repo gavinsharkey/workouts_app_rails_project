@@ -1,4 +1,8 @@
 class UserSavedWorkoutsController < ApplicationController
+  def new
+
+  end
+
   def create
     @workout = Workout.find_by(id: params[:workout_id])
     if @workout
