@@ -1,6 +1,6 @@
 class UserSavedWorkoutsController < ApplicationController
   before_action :set_workout, only: [:new, :create, :edit]
-  before_action :set_saved_workout, only: [:destroy]
+  before_action :set_saved_workout, only: [:update, :destroy]
 
   def new
     if @workout
@@ -35,7 +35,11 @@ class UserSavedWorkoutsController < ApplicationController
   end
 
   def update
-
+    if @saved_workout.update(saved_workout_params)
+      redirect_to user_path(current_user)
+    else
+      render :edit
+    end
   end
 
   def destroy
