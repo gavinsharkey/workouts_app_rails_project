@@ -20,6 +20,11 @@ class UserSavedWorkoutsController < ApplicationController
     end
   end
 
+  def destroy
+    UserSavedWorkout.find(params[:id]).destroy
+    redirect_to workout_path(params[:workout_id])
+  end
+
   private
 
   def saved_workout_params
