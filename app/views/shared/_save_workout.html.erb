@@ -1,0 +1,5 @@
+<% if workout_saved?(@workout) %>
+  <p><%= link_to('Unsave', workout_user_saved_workout_path(@workout, @workout.user_saved_workouts.find_by(saved_user: current_user)), method: :delete) %></p>
+<% else %>
+  <p><%= link_to('Save Workout', new_workout_user_saved_workout_path(@workout)) %></p>
+<% end %>
