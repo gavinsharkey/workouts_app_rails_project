@@ -15,10 +15,11 @@
 
 <h2><%= @user.name %>'s Saved Workouts: </h2>
 <ul>
-<% @user.saved_workouts.each do |workout| %>
+<% @user.user_saved_workouts.each do |user_saved_workout| %>
   <li>
-    <h2><%= link_to(workout.name, workout_path(workout)) %></h2>
-    <p><%= workout.description %></p>
+    <h2><%= link_to(user_saved_workout.title, workout_path(user_saved_workout.saved_workout)) %></h2>
+    <p>By: <%= user_saved_workout.user_name %></p>
+    <p><%= user_saved_workout.saved_workout_description %></p>
   </li>
 <% end %>
 </ul>
