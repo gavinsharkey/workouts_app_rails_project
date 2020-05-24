@@ -18,7 +18,7 @@
 <% @user.user_saved_workouts.each do |user_saved_workout| %>
   <li>
     <h2><%= link_to(title(user_saved_workout), workout_path(user_saved_workout.saved_workout)) %></h2>
-    <%= link_to('Edit Saved Workout', edit_workout_user_saved_workout_path(user_saved_workout.workout, user_saved_workout)) %>
+    <%= link_to('Edit Saved Workout', edit_workout_user_saved_workout_path(user_saved_workout.saved_workout, user_saved_workout)) %>
     <p>By: <%= user_name(user_saved_workout) %></p>
     <p><%= saved_workout_description(user_saved_workout) %></p>
   </li>
