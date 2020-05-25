@@ -1,5 +1,17 @@
 <h1>Edit Workout</h1>
 
+<h2>Add Exercise:</h2>
+<%= form_with(model: [@workout, @custom_exercise], local: true) do |f| %>
+  <%= f.label :exercise_id %>
+  <%= f.collection_select :exercise_id, @exercises, :id, :name, include_blank: true %><br />
+
+  <%= f.label :rep_range, 'Rep Range: (6, 2..5, 8 to 12, etc.)' %>
+  <%= f.text_field :rep_range %><br />
+
+  <%= f.submit 'Add Exercise' %>
+<% end %>
+
+<h2>Workout: </h2>
 <%= form_with(model: @workout, local: true) do |f| %>
   <%= f.label :name, 'Workout Name: ' %>
   <%= f.text_field :name %><br />
