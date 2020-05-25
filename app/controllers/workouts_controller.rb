@@ -1,6 +1,6 @@
 class WorkoutsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_workout, only: [:show, :edit, :update]
+  before_action :set_workout, only: [:show, :edit, :update, :destroy]
 
   def index
     if params[:user_id]
@@ -58,7 +58,8 @@ class WorkoutsController < ApplicationController
   end
 
   def destroy
-
+    @workout.destroy
+    redirect_to workouts_path
   end
 
   private
