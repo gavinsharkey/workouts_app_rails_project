@@ -1,6 +1,6 @@
 class WorkoutsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_workout, only: [:show]
+  before_action :set_workout, only: [:show, :edit, :update]
 
   def index
     if params[:user_id]
@@ -36,6 +36,18 @@ class WorkoutsController < ApplicationController
     else
       @custom_exercises = @workout.custom_exercises
     end
+  end
+
+  def edit
+    @exercises = Exercise.all
+    if !@workout
+      flash[:alert] = 'Workout Not Found'
+      redirect_to workouts_path
+    end
+  end
+
+  def update
+
   end
 
   private

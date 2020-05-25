@@ -1,0 +1,20 @@
+<h1>Edit Workout</h1>
+
+<%= form_with(model: @workout, local: true) do |f| %>
+  <%= f.label :name, 'Workout Name: ' %>
+  <%= f.text_field :name %><br />
+
+  <%= f.label :description, 'Workout Description: ' %>
+  <%= f.text_area :description %><br />
+
+  <%= f.fields_for :custom_exercises do |ce_form| %>
+    <p>Exercise #<%= ce_form.index + 1 %></p>
+    <%= ce_form.label :exercise_id %>
+    <%= ce_form.collection_select :exercise_id, @exercises, :id, :name, include_blank: true %><br />
+
+    <%= ce_form.label :rep_range, 'Rep Range: (6, 2..5, 8 to 12, etc.)' %>
+    <%= ce_form.text_field :rep_range %><br />
+  <% end %>
+
+  <%= f.submit %>
+<% end %>
