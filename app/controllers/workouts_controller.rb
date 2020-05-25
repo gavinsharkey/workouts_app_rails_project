@@ -14,6 +14,7 @@ class WorkoutsController < ApplicationController
 
   def show
     redirect_to workouts_path if !@workout
+    @custom_exercises = @workout.custom_exercises
   end
 
   private

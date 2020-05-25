@@ -17,5 +17,7 @@ Rails.application.routes.draw do
   resources :workouts, only: [:index, :show, :edit, :update, :destroy] do
     resources :user_saved_workouts, only: [:new, :create, :edit, :update, :destroy]
   end
+
+  resources :exercises, only: [:show]
   
 end

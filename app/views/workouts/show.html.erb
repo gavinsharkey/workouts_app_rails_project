@@ -1,4 +1,11 @@
 <h1><%= @workout.name %></h1>
 <h3>By: <%= workout_user_name(@workout) %></h3>
-<!-- <p><%= link_to('Save Workout', new_workout_user_saved_workout_path(@workout)) %></p> -->
 <%= render partial: 'shared/save_workout' %>
+
+<ol>
+<%= @custom_exercises.each do |custom_exercise| %>
+  <li>
+    <!-- Link to exercise show page, and show rep rage -->
+  </li>
+<% end %>
+</ol>
