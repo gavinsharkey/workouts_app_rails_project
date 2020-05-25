@@ -12,6 +12,15 @@ class WorkoutsController < ApplicationController
     end
   end
 
+  def new
+    @workout = current_user.workouts.build
+    2.times { @workout.custom_exercises.build }
+  end
+
+  def create
+
+  end
+
   def show
     redirect_to workouts_path if !@workout
     @custom_exercises = @workout.custom_exercises
