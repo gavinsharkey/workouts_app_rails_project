@@ -24,6 +24,7 @@ class WorkoutsController < ApplicationController
       redirect_to workout_path(@workout)
     else
       @exercises = Exercise.all
+      5.times { @workout.custom_exercises.build }
       render :new
     end
   end
