@@ -43,10 +43,21 @@ class WorkoutsController < ApplicationController
     if !@workout
       flash[:alert] = 'Workout Not Found'
       redirect_to workouts_path
+    else
+      @custom_exercise = CustomExercise.new
     end
   end
 
   def update
+    if @workout.update(workout_params)
+      redirect_to workout_path(@workout)
+    else
+      @exercises = Exercise.all
+      render :edit
+    end
+  end
+
+  def destroy
 
   end
 
@@ -57,6 +68,6 @@ class WorkoutsController < ApplicationController
   end
 
   def workout_params
-    params.require(:workout).permit(:name, :description, custom_exercises_attributes: [:exercise_id, :rep_range])
+    params.require(:workout).permit(:name, :description, custom_exercises_attributes: [:id, :exercise_id, :rep_range])
   end
 end
