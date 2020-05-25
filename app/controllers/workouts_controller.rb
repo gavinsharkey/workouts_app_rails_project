@@ -30,8 +30,12 @@ class WorkoutsController < ApplicationController
   end
 
   def show
-    redirect_to workouts_path if !@workout
-    @custom_exercises = @workout.custom_exercises
+    if !@workout
+      flash[:alert] = 'Workout Not Found'
+      redirect_to workouts_path
+    else
+      @custom_exercises = @workout.custom_exercises
+    end
   end
 
   private
