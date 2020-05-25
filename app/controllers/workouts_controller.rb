@@ -13,12 +13,19 @@ class WorkoutsController < ApplicationController
   end
 
   def new
+    @exercises = Exercise.all
     @workout = current_user.workouts.build
-    2.times { @workout.custom_exercises.build }
+    5.times { @workout.custom_exercises.build }
   end
 
   def create
-
+    @workout = current_user.workouts.build(workout_params)
+    if @workout.save
+      redirect_to workout_path(@workout)
+    else
+      @exercises = Exercise.all
+      render :new
+    end
   end
 
   def show
@@ -30,5 +37,9 @@ class WorkoutsController < ApplicationController
 
   def set_workout
     @workout = Workout.find_by(id: params[:id])
+  end
+
+  def workout_params
+    params.require(:workout).permit(:name, :description, custom_exercises_attributes: [:exercise_id, :rep_range])
   end
 end

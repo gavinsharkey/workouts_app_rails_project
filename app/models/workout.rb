@@ -6,4 +6,8 @@ class Workout < ApplicationRecord
 
   has_many :custom_exercises
   has_many :exercises, through: :custom_exercises
+
+  validates :name, presence: true
+
+  accepts_nested_attributes_for :custom_exercises, reject_if: proc { |attrs| attrs['exercise_id'].blank? }
 end
