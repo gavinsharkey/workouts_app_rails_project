@@ -5,8 +5,9 @@
 <ol>
 <% @custom_exercises.each do |custom_exercise| %>
   <li>
-    <h4><%= link_to(custom_exercise.exercise_name, exercise_path(custom_exercise.exercise)) %></h4>
-    <!-- <p><%= custom_exercise.rep_range %></p> -->
+    <h4><%= link_to(custom_exercise.exercise_name, exercise_path(custom_exercise.exercise)) %>, Reps: <%= custom_exercise.rep_range %></h4>
   </li>
 <% end %>
 </ol>
+
+<p><%= @workout.description %></p>
