@@ -5,7 +5,7 @@ class Workout < ApplicationRecord
   has_many :saved_users, through: :user_saved_workouts
 
   has_many :custom_exercises
-  has_many :exercises, through: :custom_exercises
+  has_many :exercises, through: :custom_exercises, dependent: :destroy
 
   validates :name, presence: true
   validates :description, presence: true
