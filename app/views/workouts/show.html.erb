@@ -3,7 +3,7 @@
 <%= render partial: 'shared/save_workout' %>
 
 <ol>
-<%= @custom_exercises.each do |custom_exercise| %>
+<% @custom_exercises.each do |custom_exercise| %>
   <li>
     <h4><%= link_to(custom_exercise.exercise_name, exercise_path(custom_exercise.exercise)) %></h4>
     <!-- <p><%= custom_exercise.rep_range %></p> -->

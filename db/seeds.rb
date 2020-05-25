@@ -26,7 +26,7 @@ workouts = ['Chest Day', 'Leg Day', 'Arm', 'Arm Day', 'Hella Pump', 'SICK WORKOU
     w = u.workouts.create(name: workouts.sample, description: Faker::Lorem.sentence)
     5.times do
       e = Exercise.order(Arel.sql('RANDOM()')).first
-      w.custom_exercises.create(exercise: e)
+      w.custom_exercises.create(exercise: e, rep_range: rand(1..12))
     end
   end
 end
