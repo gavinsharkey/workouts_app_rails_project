@@ -2,10 +2,10 @@
 
 <%= form_with(model: [current_user, @workout], local: true) do |f| %>
   <%= f.label :name, 'Workout Name: ' %>
-  <%= f.text_field :name %><br />
+  <%= f.text_field :name, placeholder: @workout.errors[:name].to_sentence %><br />
 
   <%= f.label :description, 'Workout Description: ' %>
-  <%= f.text_area :description %><br />
+  <%= f.text_area :description, placeholder: @workout.errors[:description].to_sentence %><br />
 
   <%= f.fields_for :custom_exercises do |ce_form| %>
     <p>Exercise #<%= ce_form.index + 1 %></p>
