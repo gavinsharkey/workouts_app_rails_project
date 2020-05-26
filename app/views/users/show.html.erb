@@ -1,6 +1,7 @@
 <h1><%= @user.name %>'s Profile</h1>
 
 <p><%= link_to('View All Workouts', workouts_path) %></p>
+<p><%= link_to('Make Workout', new_user_workout_path(current_user)) if current_users_profile?(@user) %></p>
 
 <h2><%= @user.name %>'s Workouts: </h2>
 
@@ -18,9 +19,9 @@
 <% @user.user_saved_workouts.each do |user_saved_workout| %>
   <li>
     <h2><%= link_to(title(user_saved_workout), workout_path(user_saved_workout.saved_workout)) %></h2>
-    <%= link_to('Edit Saved Workout', edit_workout_user_saved_workout_path(user_saved_workout.saved_workout, user_saved_workout)) %>
-    <%= link_to('Unsave', workout_user_saved_workout_path(user_saved_workout.saved_workout, user_saved_workout), method: :delete) %>
-    <p>By: <%= user_name(user_saved_workout) %></p>
+    <%= link_to('Edit Saved Workout', edit_workout_user_saved_workout_path(user_saved_workout.saved_workout, user_saved_workout)) if current_users_saved_workout?(user_saved_workout) %>
+    <%= link_to('Unsave', workout_user_saved_workout_path(user_saved_workout.saved_workout, user_saved_workout), method: :delete) if current_users_saved_workout?(user_saved_workout) %>
+    <p>By: <%= link_to(user_name(user_saved_workout), user_path(user_saved_workout.saved_user)) %></p>
     <p><%= saved_workout_description(user_saved_workout) %></p>
   </li>
 <% end %>
