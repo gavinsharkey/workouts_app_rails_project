@@ -3,10 +3,13 @@ class WorkoutsController < ApplicationController
   before_action :set_workout, only: [:show, :edit, :update, :destroy]
 
   def index
+    @exercises = Exercise.all
     if params[:user_id]
       @user = User.find_by(id: params[:user_id])
       redirect_to workouts_path if !@user
       @workouts = @user.workouts
+    elsif params[:exercise_name] && !params[:exercise_name].blank?
+      @workouts = Workout.with_exercise(params[:exercise_name])
     else
       @workouts = Workout.all
     end
