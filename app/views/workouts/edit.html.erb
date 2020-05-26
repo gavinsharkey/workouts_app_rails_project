@@ -26,6 +26,9 @@
 
     <%= ce_form.label :rep_range, 'Rep Range: (6, 2..5, 8 to 12, etc.)' %>
     <%= ce_form.text_field :rep_range %><br />
+
+    <%= ce_form.label :_destroy, 'Delete?' %>
+    <%= ce_form.check_box :_destroy %>
   <% end %>
 
   <%= f.submit %>
