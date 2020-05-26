@@ -14,6 +14,9 @@
 
     <%= ce_form.label :rep_range, 'Rep Range: (6, 2..5, 8 to 12, etc.)' %>
     <%= ce_form.text_field :rep_range %><br />
+
+    <%= ce_form.label :sets, 'Sets: ' %>
+    <%= ce_form.number_field :sets %><br />
   <% end %>
 
   <%= f.submit %>
