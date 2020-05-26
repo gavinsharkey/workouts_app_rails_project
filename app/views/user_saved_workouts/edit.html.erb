@@ -1,8 +1,3 @@
 <h1>Edit Saved Workout</h1>
 
-<%= form_with(model: [@workout, @saved_workout], local: true) do |f| %>
-  <%= f.label :custom_title, 'Custom Title For Workout: ' %>
-  <%= f.text_field :custom_title %><br />
-
-  <%= f.submit 'Save Workout' %>
-<% end %>
+<%= render partial: 'save_workout_form', locals: {workout: @workout, saved_workout: @saved_workout} %>

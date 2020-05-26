@@ -1,0 +1,6 @@
+<%= form_with(model: [workout, saved_workout], local: true) do |f| %>
+  <%= f.label :custom_title, 'Custom Title For Workout: ' %>
+  <%= f.text_field :custom_title, placeholder: 'Optional' %><br />
+
+  <%= f.submit 'Save Workout' %>
+<% end %>
