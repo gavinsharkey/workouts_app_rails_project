@@ -1,4 +1,5 @@
 class UserSavedWorkoutsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_workout, only: [:new, :create, :edit]
   before_action :set_saved_workout, only: [:update, :destroy]
 
@@ -44,7 +45,7 @@ class UserSavedWorkoutsController < ApplicationController
 
   def destroy
     @saved_workout.destroy
-    redirect_to workout_path(params[:workout_id])
+    redirect_back(fallback_location: workouts_path)
   end
 
   private
