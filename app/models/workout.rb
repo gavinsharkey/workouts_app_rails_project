@@ -11,4 +11,6 @@ class Workout < ApplicationRecord
   validates :description, presence: true
 
   accepts_nested_attributes_for :custom_exercises, allow_destroy: true, reject_if: proc { |attrs| attrs['exercise_id'].blank? }
+
+  
 end
