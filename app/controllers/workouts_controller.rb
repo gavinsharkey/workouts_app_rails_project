@@ -38,6 +38,7 @@ class WorkoutsController < ApplicationController
       redirect_to workouts_path
     else
       @custom_exercises = @workout.custom_exercises
+      @comment = @workout.comments.build
     end
   end
 
