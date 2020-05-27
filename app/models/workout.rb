@@ -12,5 +12,6 @@ class Workout < ApplicationRecord
 
   accepts_nested_attributes_for :custom_exercises, allow_destroy: true, reject_if: proc { |attrs| attrs['exercise_id'].blank? }
 
+
   scope :with_exercise, ->(exercise_name) { joins(:custom_exercises).joins(:exercises).where('exercises.name = ?', exercise_name).distinct }
 end
