@@ -53,7 +53,27 @@ create_table "custom_exercises", force: :cascade do |t|
   t.index ["workout_id"], name: "index_custom_exercises_on_workout_id"
 end
 ```
-- [ ] Include reasonable validations for simple model objects (list of model objects with validations e.g. User, Recipe, Ingredient, Item)
+- [x] Include reasonable validations for simple model objects (list of model objects with validations e.g. User, Recipe, Ingredient, Item)
+- - As well as the default validations added by Devise for users, a user must also have a name to be valid.  
+```
+class User < ApplicationRecord
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+
+  devise :omniauthable, omniauth_providers: %i[facebook]
+
+  validates :name, presence: true
+```
+I've also added simple validations for workouts and custom_exercises for name, description, rep_range, and sets
+```
+class Workout < ApplicationRecord
+  validates :name, presence: true
+  validates :description, presence: true
+
+class CustomExercise < ApplicationRecord
+  validates :rep_range, presence: true
+  validates :sets, presence: true
+```
 - [ ] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
 - [ ] Include signup (how e.g. Devise)
 - [ ] Include login (how e.g. Devise)
