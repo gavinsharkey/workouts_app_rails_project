@@ -5,7 +5,8 @@ class User < ApplicationRecord
   devise :omniauthable, omniauth_providers: %i[facebook]
 
   has_many :workouts
-  has_many :user_saved_workouts, foreign_key: :saved_user_id
+
+  has_many :user_saved_workouts, foreign_key: :saved_user_id, dependent: :destroy
   has_many :saved_workouts, through: :user_saved_workouts
 
   validates :name, presence: true
