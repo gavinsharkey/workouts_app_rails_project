@@ -3,7 +3,7 @@ class WorkoutsController < ApplicationController
   before_action :set_workout, only: [:show, :edit, :update, :destroy]
 
   def index
-    @exercises = Exercise.all
+    @exercises = Exercise.alphabetical
     if params[:user_id]
       @user = User.find_by(id: params[:user_id])
       redirect_to workouts_path if !@user
@@ -16,7 +16,7 @@ class WorkoutsController < ApplicationController
   end
 
   def new
-    @exercises = Exercise.all
+    @exercises = Exercise.alphabetical
     @workout = current_user.workouts.build
     5.times { @workout.custom_exercises.build }
   end
@@ -26,7 +26,7 @@ class WorkoutsController < ApplicationController
     if @workout.save
       redirect_to workout_path(@workout)
     else
-      @exercises = Exercise.all
+      @exercises = Exercise.alphabetical
       # 5.times { @workout.custom_exercises.build }
       render :new
     end
@@ -42,7 +42,7 @@ class WorkoutsController < ApplicationController
   end
 
   def edit
-    @exercises = Exercise.all
+    @exercises = Exercise.alphabetical
     if !@workout
       flash[:alert] = 'Workout Not Found'
       redirect_to workouts_path
@@ -55,7 +55,7 @@ class WorkoutsController < ApplicationController
     if @workout.update(workout_params)
       redirect_to workout_path(@workout)
     else
-      @exercises = Exercise.all
+      @exercises = Exercise.alphabetical
       render :edit
     end
   end
