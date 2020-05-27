@@ -1,7 +1,7 @@
 class Workout < ApplicationRecord
   belongs_to :user
 
-  has_many :comments
+  has_many :comments, inverse_of: 'workout'
 
   has_many :user_saved_workouts, foreign_key: :saved_workout_id, dependent: :destroy
   has_many :saved_users, through: :user_saved_workouts
@@ -16,4 +16,8 @@ class Workout < ApplicationRecord
 
 
   scope :with_exercise, ->(exercise_name) { joins(:custom_exercises).joins(:exercises).where('exercises.name = ?', exercise_name).distinct }
+
+  def comments_by_created_at
+    self.comments.includes(:user).order(created_at: :desc)
+  end
 end
