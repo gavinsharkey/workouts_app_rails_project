@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_26_151441) do
+ActiveRecord::Schema.define(version: 2020_05_27_142354) do
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "workout_id"
+    t.text "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_comments_on_user_id"
+    t.index ["workout_id"], name: "index_comments_on_workout_id"
+  end
 
   create_table "custom_exercises", force: :cascade do |t|
     t.integer "workout_id"
