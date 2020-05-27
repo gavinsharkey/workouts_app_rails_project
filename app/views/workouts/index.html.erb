@@ -1,4 +1,6 @@
-<h1>All Workouts</h1>
+<h1>Workouts</h1>
+
+<%= link_to('Make Workout', new_user_workout_path(current_user)) %>
 
 <h3>Workouts by exercise: </h3>
 <%= form_with(url: workouts_path, method: :get, local: true) do %>
