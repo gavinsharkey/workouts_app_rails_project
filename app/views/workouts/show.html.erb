@@ -13,3 +13,15 @@
 </ol>
 
 <p><%= @workout.description %></p>
+
+<%= form_with(model: [@workout, @comment], local: true) do |f| %>
+  <%= f.text_area :body, placeholder: 'Comment Here...' %><br />
+  <%= f.submit %>
+<% end %>
+
+<h2>Comments: </h2>
+<ul>
+<% @workout.comments_by_created_at.each do |comment| %>
+  <li><%= link_to(comment_user_name(comment), user_path(comment.user)) %>: <%= comment.body %></li>
+<% end %>
+</ul>
