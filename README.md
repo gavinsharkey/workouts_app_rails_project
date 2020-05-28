@@ -1,1 +1,38 @@
+# Workouts App / Rails Project
 
+
+
+## Installation
+
+After you fork this repo, run
+
+```bundle```
+
+to load the dependencies. Then run
+
+```rails db:migrate```
+
+and
+
+```rails db:seed```
+
+to initialize the database and add some dummy data. You'll also probably need to run
+
+```yarn install```
+
+to create the yarn.lock file.  
+
+To start the app, run
+
+```rails s```
+
+and visit localhost:3000 to view it. Enjoy!  
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/gavinsharkey/workouts_app_rails_project.
+
+
+## License
+
+This app is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
