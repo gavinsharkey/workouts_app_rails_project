@@ -1,6 +1,10 @@
 # Workouts App / Rails Project
 
+This is my Rails project, Workouts App. This app allows users to build custom workouts. You can also view other users workouts, comment on them, and even save them to your profile!
 
+## Usage
+
+After signing up (manually or through Facebook), you'll be greeted with a list of workouts made by other users. You can view these workouts, and maybe save and comment on one if you really like it! Then, you can go to your profile and make your own workout, exactly how you'd like! Whether it's your chest day routine, or a hella sick ab workout, you can make it!
 
 ## Installation
 
