@@ -14,7 +14,7 @@ class Workout < ApplicationRecord
 
   accepts_nested_attributes_for :custom_exercises, allow_destroy: true, reject_if: proc { |attrs| attrs['exercise_id'].blank? }
 
-
+  scope :newest_first, -> { order(created_at: :desc) }
   scope :with_exercise, ->(exercise_name) { joins(:custom_exercises).joins(:exercises).where('exercises.name = ?', exercise_name).distinct }
 
   def comments_by_created_at
