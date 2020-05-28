@@ -13,6 +13,6 @@ class CustomExercisesController < ApplicationController
   private
 
   def custom_exercise_params
-    params.require(:custom_exercise).permit(:exercise_id, :rep_range)
+    params.require(:custom_exercise).permit(:exercise_id, :rep_range, :sets)
   end
 end
