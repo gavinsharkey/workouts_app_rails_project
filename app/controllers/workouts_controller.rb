@@ -16,7 +16,7 @@ class WorkoutsController < ApplicationController
     elsif params[:exercise_name] && !params[:exercise_name].blank?
       @workouts = Workout.with_exercise(params[:exercise_name])
     else
-      @workouts = Workout.all
+      @workouts = Workout.newest_first
     end
   end
 
