@@ -1,11 +1,10 @@
 <h1><%= "#{@user.name}'s " if @user %>Workouts</h1>
+<p><%= link_to('View All Workouts', workouts_path) if @user %></p>
 
-<% if !@user %>
-  <h3>Workouts by exercise: </h3>
-  <%= form_with(url: workouts_path, method: :get, local: true) do %>
-    <%= select_tag :exercise_name, options_from_collection_for_select(@exercises, :name, :name), include_blank: true %>
-    <%= submit_tag 'Filter' %>
-  <% end %>
+<h3>Workouts by exercise: </h3>
+<%= form_with(model: [@user, @workout], method: :get, local: true) do %>
+  <%= select_tag :exercise_name, options_from_collection_for_select(@exercises, :name, :name), include_blank: true %>
+  <%= submit_tag 'Filter' %>
 <% end %>
 
 <ul>
