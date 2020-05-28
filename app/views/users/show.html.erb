@@ -22,7 +22,7 @@
     <h2><%= link_to(title(user_saved_workout), workout_path(user_saved_workout.saved_workout)) %></h2>
     <%= link_to('Edit Saved Workout', edit_workout_user_saved_workout_path(user_saved_workout.saved_workout, user_saved_workout)) if current_users_saved_workout?(user_saved_workout) %>
     <%= link_to('Unsave', workout_user_saved_workout_path(user_saved_workout.saved_workout, user_saved_workout), method: :delete) if current_users_saved_workout?(user_saved_workout) %>
-    <p>By: <%= link_to(user_name(user_saved_workout), user_path(user_saved_workout.saved_user)) %></p>
+    <p>By: <%= link_to(user_name(user_saved_workout), user_path(user_saved_workout.saved_workout.user)) %></p>
     <p><%= saved_workout_description(user_saved_workout) %></p>
   </li>
 <% end %>
