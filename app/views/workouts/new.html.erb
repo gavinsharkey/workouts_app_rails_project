@@ -13,10 +13,10 @@
     <%= ce_form.collection_select :exercise_id, @exercises, :id, :name, include_blank: true %><br />
 
     <%= ce_form.label :rep_range, 'Rep Range: (6, 2..5, 8 to 12, etc.)' %>
-    <%= ce_form.text_field :rep_range %><br />
+    <%= ce_form.text_field :rep_range, placeholder: @workout.errors[:'custom_exercises.rep_range'].to_sentence %><br />
 
     <%= ce_form.label :sets, 'Sets: ' %>
-    <%= ce_form.number_field :sets %><br />
+    <%= ce_form.number_field :sets, placeholder: @workout.errors[:'custom_exercises.sets'].to_sentence %><br />
   <% end %>
 
   <%= f.submit %>
