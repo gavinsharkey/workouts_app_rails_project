@@ -95,11 +95,16 @@ class WorkoutsController < ApplicationController
   before_action :set_workout, only: [:show, :edit, :update, :destroy]
 
   def index
+    @workout = Workout.new
     @exercises = Exercise.alphabetical
     if params[:user_id]
       @user = User.find_by(id: params[:user_id])
       redirect_to workouts_path if !@user
-      @workouts = @user.workouts
+      if params[:exercise_name] && !params[:exercise_name].blank?
+        @workouts = @user.workouts.with_exercise(params[:exercise_name])
+      else
+        @workouts = @user.workouts
+      end
     elsif params[:exercise_name] && !params[:exercise_name].blank?
       @workouts = Workout.with_exercise(params[:exercise_name])
     else
@@ -113,7 +118,7 @@ class WorkoutsController < ApplicationController
 - - I used Devise for user authentication. After adding Devise to my Gemfile, I configured Devise by first running  `rails g devise:install` in console. This generates an initalizer file for configuring Devise settings. After everything is setup properly, I generate the User model by running `rails generate devise User`.  
 This command does a lot. Among other things, it creates the users table with an email and encrypted_password column (much like how bcrypt uses a password_digest column), it creates controllers responsible for signup, login, etc. (RegistrationsController, SessionsController, ...), it generates routes and route helpers for things like signup, login, and logout (new_user_registration_path, new_user_session_path, destroy_user_session_path), and much more.
 
-I wanted users to also ahve a name column. so after adding that column to users, I generated my devise views with `rails generate devise:views` and added a name field to the new template for registrations:
+I wanted users to also have a name column. so after adding that column to users, I generated my devise views with `rails generate devise:views` and added a name field to the new template for registrations:
 ```
 <h2>Sign up</h2>
 
@@ -127,6 +132,21 @@ I wanted users to also ahve a name column. so after adding that column to users,
 
   <div class="field">
     <%= f.label :email %><br />
+```
+Then I created a custom RegistrationsController, so I could add *:name* to the permitted params.
+```
+class RegistrationsController < Devise::RegistrationsController
+
+  private
+
+  def sign_up_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+  
+  def account_update_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :current_password)
+  end
+end
 ```
 - [x] Include third party signup/login (how e.g. Devise/OmniAuth)
 - - I decided to use Facebook for third-party authentication.  
@@ -180,12 +200,69 @@ def self.from_omniauth(auth)
   end
 end
 ```
-- [ ] Include nested resource show or index (URL e.g. users/2/recipes)
-- [ ] Include nested resource "new" form (URL e.g. recipes/1/ingredients/new)
-- [ ] Include form display of validation errors (form URL e.g. /recipes/new)
+- [x] Include nested resource show or index (URL e.g. users/2/recipes)
+- - Users can view workouts nested under users. In routes, workouts have nested index, new, and create routes under users.
+```
+resources :users, only: [:show] do
+  resources :workouts, only: [:index, :new, :create]
+end
+```
+The workouts index action sets @workouts accordingly if a *user_id* is present.
+```
+def index
+  @workout = Workout.new
+  @exercises = Exercise.alphabetical
+  if params[:user_id]
+    @user = User.find_by(id: params[:user_id])
+    redirect_to workouts_path if !@user
+    if params[:exercise_name] && !params[:exercise_name].blank?
+      @workouts = @user.workouts.with_exercise(params[:exercise_name])
+    else
+      @workouts = @user.workouts
+    end
+  elsif params[:exercise_name] && !params[:exercise_name].blank?
+    @workouts = Workout.with_exercise(params[:exercise_name])
+  else
+    @workouts = Workout.all
+  end
+end
+```
+- [x] Include nested resource "new" form (URL e.g. recipes/1/ingredients/new)
+- - When a user saved a workout, they can give it a custom title. A form to save a workout is nested under workouts.  
+```
+resources :workouts, only: [:index, :show, :edit, :update, :destroy] do
+  resources :user_saved_workouts, only: [:new, :create, :edit, :update, :destroy]
+```
+```
+<%= form_with(model: [workout, saved_workout], local: true) do |f| %>
+  <%= f.label :custom_title, 'Custom Title For Workout: ' %>
+  <%= f.text_field :custom_title, placeholder: 'Optional' %><br />
+
+  <%= f.submit 'Save Workout' %>
+<% end %>
+```
+- [x] Include form display of validation errors (form URL e.g. /recipes/new)
+- - As well as rendering the field in the field_with_errors class (done automatically by form_with),
+```
+ .field_with_errors input {
+     border-color: red;
+     border-radius: 2px;
+ }
+```
+I also display the error messages as the placeholder in my fields if there are any.
+```
+<h1>New Workout</h1>
+
+<%= form_with(model: [current_user, @workout], local: true) do |f| %>
+  <%= f.label :name, 'Workout Name: ' %>
+  <%= f.text_field :name, placeholder: @workout.errors[:name].to_sentence %><br />
+
+  <%= f.label :description, 'Workout Description: ' %>
+  <%= f.text_area :description, placeholder: @workout.errors[:description].to_sentence %><br />
+```
 
 Confirm:
-- [ ] The application is pretty DRY
-- [ ] Limited logic in controllers
-- [ ] Views use helper methods if appropriate
-- [ ] Views use partials if appropriate
+- [x] The application is pretty DRY
+- [x] Limited logic in controllers
+- [x] Views use helper methods if appropriate
+- [x] Views use partials if appropriate
