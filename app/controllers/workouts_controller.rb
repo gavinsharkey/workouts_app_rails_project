@@ -7,13 +7,16 @@ class WorkoutsController < ApplicationController
     @exercises = Exercise.alphabetical
     if params[:user_id]
       @user = User.find_by(id: params[:user_id])
-      redirect_to workouts_path if !@user
-      if params[:exercise_name] && !params[:exercise_name].blank?
-        @workouts = @user.workouts.with_exercise(params[:exercise_name])
+      if !@user
+        redirect_to workouts_path, alert: 'User Not Found' 
       else
-        @workouts = @user.workouts
+        if params[:exercise_name] && params[:exercise_name].present?
+          @workouts = @user.workouts.with_exercise(params[:exercise_name])
+        else
+          @workouts = @user.workouts
+        end
       end
-    elsif params[:exercise_name] && !params[:exercise_name].blank?
+    elsif params[:exercise_name] && params[:exercise_name].present?
       @workouts = Workout.with_exercise(params[:exercise_name])
     else
       @workouts = Workout.newest_first
