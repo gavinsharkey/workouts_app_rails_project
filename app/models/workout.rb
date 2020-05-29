@@ -6,8 +6,8 @@ class Workout < ApplicationRecord
   has_many :user_saved_workouts, foreign_key: :saved_workout_id, dependent: :destroy
   has_many :saved_users, through: :user_saved_workouts
 
-  has_many :custom_exercises
-  has_many :exercises, through: :custom_exercises, dependent: :destroy
+  has_many :custom_exercises, dependent: :destroy
+  has_many :exercises, through: :custom_exercises
 
   validates :name, presence: true
   validates :description, presence: true
