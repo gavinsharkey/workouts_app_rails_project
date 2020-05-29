@@ -10,7 +10,7 @@
 <ul>
 <% @workouts.each do |workout| %>
   <li>
-    <h2><%= link_to(workout.name, workout_path(workout)) %></h2>
+    <h2><%= link_to(workout.name, workout_path(workout), class: 'button') %></h2>
     <p><%= workout.description %></p>
     By: <%= link_to(workout_user_name(workout), user_path(workout.user)) %>
   </li>
