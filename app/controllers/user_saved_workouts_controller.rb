@@ -24,7 +24,7 @@ class UserSavedWorkoutsController < ApplicationController
 
   def edit
     if @workout
-      @saved_workout = @workout.user_saved_workouts.find_by(params[:id])
+      @saved_workout = @workout.user_saved_workouts.find_by(id: params[:id])
       if !@saved_workout
         flash[:alert] = 'Workout Not Saved'
         redirect_to user_path(current_user)
