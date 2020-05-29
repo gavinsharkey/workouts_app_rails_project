@@ -1,27 +1,16 @@
 <h1><%= @user.name %>'s Profile</h1>
 
-<p><%= link_to('View All Workouts', workouts_path) %></p>
-<p><%= link_to("View #{@user.name}'s Workouts", user_workouts_path(@user)) %></p>
-<p><%= link_to('Make Workout', new_user_workout_path(current_user)) if current_users_profile?(@user) %></p>
-
-<!-- <h2><%= @user.name %>'s Workouts: </h2>
-
-<ul>
-<% @user.workouts.each do |workout| %>
-  <li>
-    <h2><%= link_to(workout.name, workout_path(workout)) %></h2>
-    <p><%= workout.description %></p>
-  </li>
-<% end %>
-</ul> -->
+<p><%= link_to('View All Workouts', workouts_path, class: 'small_button') %></p>
+<p><%= link_to("View #{@user.name}'s Workouts", user_workouts_path(@user), class: 'small_button') %></p>
+<p><%= link_to('Make Workout', new_user_workout_path(current_user), class: 'small_button') if current_users_profile?(@user) %></p>
 
 <h2><%= @user.name %>'s Saved Workouts: </h2>
 <ul>
 <% @user.user_saved_workouts.each do |user_saved_workout| %>
   <li>
-    <h2><%= link_to(title(user_saved_workout), workout_path(user_saved_workout.saved_workout)) %></h2>
-    <%= link_to('Edit Saved Workout', edit_workout_user_saved_workout_path(user_saved_workout.saved_workout, user_saved_workout)) if current_users_saved_workout?(user_saved_workout) %>
-    <%= link_to('Unsave', workout_user_saved_workout_path(user_saved_workout.saved_workout, user_saved_workout), method: :delete) if current_users_saved_workout?(user_saved_workout) %>
+    <h2><%= link_to(title(user_saved_workout), workout_path(user_saved_workout.saved_workout), class: 'button') %></h2>
+    <%= link_to('Edit Saved Workout', edit_workout_user_saved_workout_path(user_saved_workout.saved_workout, user_saved_workout), class: 'small_button') if current_users_saved_workout?(user_saved_workout) %>
+    <%= link_to('Unsave', workout_user_saved_workout_path(user_saved_workout.saved_workout, user_saved_workout), method: :delete, class: 'small_button') if current_users_saved_workout?(user_saved_workout) %>
     <p>By: <%= link_to(user_name(user_saved_workout), user_path(user_saved_workout.saved_workout.user)) %></p>
     <p><%= saved_workout_description(user_saved_workout) %></p>
   </li>
