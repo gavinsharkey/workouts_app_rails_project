@@ -1,7 +1,7 @@
 <h1><%= @workout.name %></h1>
 <h3>By: <%= link_to(workout_user_name(@workout), user_path(@workout.user)) %></h3>
 <%= render partial: 'shared/save_workout' if !current_users_workout?(@workout) %>
-<%= link_to('Edit Workout', edit_workout_path(@workout)) if current_users_workout?(@workout) %>
+<%= link_to('Edit Workout', edit_workout_path(@workout), class: 'small_button') if current_users_workout?(@workout) %>
 <%= button_to('Delete Workout', workout_path(@workout), method: :delete, data: { confirm: 'Are you sure?' }) if current_users_workout?(@workout) %>
 
 <ol>
