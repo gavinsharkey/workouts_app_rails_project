@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'application#home'
+  root 'welcome#home'
 
   devise_for :users, :controllers => {registrations: 'registrations', omniauth_callbacks: 'omniauth_callbacks' }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/signup', to: 'devise/registrations#new'
   end
+
+  get '/workouts', to: 'workouts#index', as: :user_root
 
   resources :users, only: [:show] do
     resources :workouts, only: [:index, :new, :create]
