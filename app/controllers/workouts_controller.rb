@@ -5,19 +5,20 @@ class WorkoutsController < ApplicationController
   def index
     @workout = Workout.new
     @exercises = Exercise.alphabetical
+    @users = User.alphabetical
     if params[:user_id]
       @user = User.find_by(id: params[:user_id])
       if !@user
         redirect_to workouts_path, alert: 'User Not Found' 
       else
         if params[:exercise_name] && params[:exercise_name].present?
-          @workouts = @user.workouts.with_exercise(params[:exercise_name])
+          @workouts = @user.workouts.by_exercise(params[:exercise_name])
         else
           @workouts = @user.workouts
         end
       end
     elsif params[:exercise_name] && params[:exercise_name].present?
-      @workouts = Workout.with_exercise(params[:exercise_name])
+      @workouts = Workout.by_exercise(params[:exercise_name]).by_user(params[:user_name])
     else
       @workouts = Workout.newest_first
     end
