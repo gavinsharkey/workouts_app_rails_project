@@ -17,7 +17,7 @@ class WorkoutsController < ApplicationController
           @workouts = @user.workouts
         end
       end
-    elsif params[:exercise_name] && params[:exercise_name].present?
+    elsif params[:exercise_name].try(:present?) || params[:user_name].try(:present?)
       @workouts = Workout.by_exercise(params[:exercise_name]).by_user(params[:user_name])
     else
       @workouts = Workout.newest_first

@@ -15,8 +15,8 @@ class Workout < ApplicationRecord
   accepts_nested_attributes_for :custom_exercises, allow_destroy: true, reject_if: proc { |attrs| attrs['exercise_id'].blank? }
 
   scope :newest_first, -> { order(created_at: :desc) }
-  scope :by_exercise, ->(exercise_name) { joins(:custom_exercises).joins(:exercises).where('exercises.name = ? ', exercise_name).distinct }
-  scope :by_user, ->(user_name) { joins(:user).where('users.name = ?', user_name).distinct }
+  scope :by_exercise, ->(exercise_name) { joins(:custom_exercises).joins(:exercises).where('exercises.name LIKE ? ', "%#{exercise_name}%").distinct }
+  scope :by_user, ->(user_name) { joins(:user).where('users.name LIKE ?', "%#{user_name}%").distinct }
 
   def comments_by_created_at
     self.comments.includes(:user).order(created_at: :desc)
